@@ -4,7 +4,14 @@
 require 'fileutils'
 
 namespace :war do
-  task :parse_args do
+  task :init do
+    if !File.exists?("#{Rails.root}/config/initializers/ucb_rake.rb")
+      puts "ucb_rake not initialized, run: script/generate ucb_rake"
+      exit(1)
+    else
+      require "#{Rails.root}/config/initializers/ucb_rake"
+    end
+    
     if ARGV[1]
       APP_WAR = ARGV[1]
     else
@@ -20,7 +27,7 @@ namespace :war do
   end
   
   desc "Extracts war file into a directory <app>.war/ (used for JBoss deployment)"
-  task :extract => [:parse_args, :warble, :build_tmp_war] do
+  task :extract => [:init, :warble, :build_tmp_war] do
     pwd = Dir.getwd
     Dir.chdir("tmp.war")
     `jar xvf #{APP_WAR}`
@@ -55,18 +62,20 @@ namespace :war do
     
     desc "Build war file and deploy to jboss"
     task :jboss => [:default] do
-      if !JBOSS_HOME
-        puts "JBOSS_HOME not configured in #{Rails.root}/config/war_deployer.rb"
-        `mv sample_app.war #{JBOSS_HOME}/server/default/deploy/sample_app.war`
+      if !defined?(JBOSS_HOME)
+        puts "JBOSS_HOME not configured. See: #{Rails.root}/config/war_deployer.rb"
+        exit(1)
       end
+      FileUtils.mv("sample_app.war ", "#{JBOSS_HOME}/server/default/deploy/sample_app.war")
     end
     
     desc "Build war file and deploy to tomcat"    
-    task :tomcat => [:parse_args, :warble] do
-      if !TOMCAT_HOME
-        puts "TOMCAT_HOME not configured in #{Rails.root}/config/war_deployer.rb"
+    task :tomcat => [:init, :warble] do
+      if !defined?(TOMCAT_HOME)
+        puts "TOMCAT_HOME not configured. See: #{Rails.root}/config/war_deployer.rb"
+        exit(1)
       end
-      `mv sample_app.war #{TOMCAT_HOME}/webapps/sample_app.war`
+      FileUtils.mv("sample_app.war", "#{TOMCAT_HOME}/webapps/sample_app.war")
     end
   end
 end
