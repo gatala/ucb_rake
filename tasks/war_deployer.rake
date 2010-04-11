@@ -20,7 +20,7 @@ namespace :war do
   end
   
   desc "Extracts war file into a directory <app>.war/ (used for JBoss deployment)"
-  task :extract_war => [:parse_args, :warble, :build_tmp_war] do
+  task :extract => [:parse_args, :warble, :build_tmp_war] do
     pwd = Dir.getwd
     Dir.chdir("tmp.war")
     `jar xvf #{APP_WAR}`
@@ -46,7 +46,7 @@ namespace :war do
   end
   
   namespace :deploy do
-    task :default => [:extract_war] do
+    task :default => [:extract] do
       if !File.exists?(APP_WAR)
         puts "#{APP_WAR} not found"
         system.exit(1)

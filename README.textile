@@ -1,0 +1,20 @@
+
+h1. UCB Rake
+
+A collection of useful rake tasks for Rails apps at UC Berkeley.
+
+h2. Installation (from Rails.root run):
+
+<pre>
+  script/plugin install git://github.com/glie/ucb_rake.git
+<pre>
+
+h2. War Deployer
+
+Read tasks/war_deployer.rake for details for configuration.
+
+* rake war:deploy:jboss - build app as .war file and deploy to jboss app server
+* rake war:extract - Extracts war file into a directory <app>.war/ (used for JBoss deployment)
+* rake war:deploy:tomcat - build app as .war file and deploy to tomcat app server
+
+
