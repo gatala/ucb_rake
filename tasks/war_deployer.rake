@@ -3,9 +3,11 @@
 
 require 'fileutils'
 
+CONFIG_FILE = "#{Rails.root}/config/initializers/ucb_rake.rb"
+
 namespace :war do
   task :init do
-    if !File.exists?("#{Rails.root}/config/initializers/ucb_rake.rb")
+    if !File.exists?(CONFIG_FILE)
       puts "ucb_rake not initialized, run: script/generate ucb_rake"
       exit(1)
     else
@@ -63,7 +65,7 @@ namespace :war do
     desc "Build war file and deploy to jboss"
     task :jboss => [:default] do
       if !defined?(JBOSS_HOME)
-        puts "JBOSS_HOME not configured. See: #{Rails.root}/config/war_deployer.rb"
+        puts "JBOSS_HOME not configured. See: #{CONFIG_FILE}"
         exit(1)
       end
       FileUtils.mv("sample_app.war ", "#{JBOSS_HOME}/server/default/deploy/sample_app.war")
@@ -72,7 +74,7 @@ namespace :war do
     desc "Build war file and deploy to tomcat"    
     task :tomcat => [:init, :warble] do
       if !defined?(TOMCAT_HOME)
-        puts "TOMCAT_HOME not configured. See: #{Rails.root}/config/war_deployer.rb"
+        puts "TOMCAT_HOME not configured. See: #{CONFIG_FILE}"
         exit(1)
       end
       FileUtils.mv("sample_app.war", "#{TOMCAT_HOME}/webapps/sample_app.war")
