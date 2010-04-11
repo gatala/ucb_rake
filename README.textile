@@ -9,7 +9,9 @@ h2. Installation (from Rails.root run):
   script/plugin install git://github.com/glie/ucb_rake.git
 </pre>
 
-h2. War Deployer
+h2. Tasks
+
+h3. War Deployer
 
 Read tasks/war_deployer.rake for details for configuration.
 
