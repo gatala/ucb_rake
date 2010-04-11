@@ -57,16 +57,16 @@ namespace :war do
     task :jboss => [:default] do
       if !JBOSS_HOME
         puts "JBOSS_HOME not configured in #{Rails.root}/config/war_deployer.rb"
-      `mv sample_app.war #{JBOSS_HOME}/server/default/deploy/sample_app.war`
+        `mv sample_app.war #{JBOSS_HOME}/server/default/deploy/sample_app.war`
+      end
     end
     
     desc "Build war file and deploy to tomcat"    
-      task :tomcat => [:parse_args, :warble] do
-        if !TOMCAT_HOME
-          puts "TOMCAT_HOME not configured in #{Rails.root}/config/war_deployer.rb"
-        end
-        `mv sample_app.war #{TOMCAT_HOME}/webapps/sample_app.war`
+    task :tomcat => [:parse_args, :warble] do
+      if !TOMCAT_HOME
+        puts "TOMCAT_HOME not configured in #{Rails.root}/config/war_deployer.rb"
       end
+      `mv sample_app.war #{TOMCAT_HOME}/webapps/sample_app.war`
     end
   end
 end
