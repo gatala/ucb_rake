@@ -18,5 +18,3 @@ Read tasks/war_deployer.rake for details for configuration.
 * rake war:deploy:jboss - build app as .war file and deploy to jboss app server
 * rake war:extract - Extracts war file into a directory <app>.war/ (used for JBoss deployment)
 * rake war:deploy:tomcat - build app as .war file and deploy to tomcat app server
-
-
