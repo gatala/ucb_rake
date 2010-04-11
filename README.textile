@@ -7,8 +7,11 @@ h2. Installation (from Rails.root run):
 
 <pre>
   script/plugin install git://github.com/glie/ucb_rake.git
+  # creates Rails.root/config/initializers/ucb_rake.rb
   script/generate ucb_rake
 </pre>
+
+Before using these tasks, take a look at Rails.root/config/initializers/ucb_rake.rb and set the appropriate configuration options for your environment.
 
 h2. Tasks
 
