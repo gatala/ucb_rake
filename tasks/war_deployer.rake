@@ -1,5 +1,5 @@
-# This file allows you to deploy a rails apps that has been built as a .war file
-# to the JBoss application server
+# These tasks allow you to quickly deploy a rails app that has been built as a
+# .war archive to JBoss or Tomcat.
 
 require 'fileutils'
 

@@ -7,8 +7,11 @@ Gem::Specification.new do |s|
   s.homepage = "http://github.com/glie/ucb_rake"
   s.description = "A collection of useful rake tasks for Rails apps at UCB."
   s.authors = ["Steven Hansen"]
-  s.files = ["README.textile",
+  s.files = [
+    "README.textile",
     "ucb_rake.gemspec",
     "tasks/war_deployer.rake",
+    "generators/ucb_rake_generator.rb",
+    "generators/templates/ucb_rake.rb",             
   ]
 end
