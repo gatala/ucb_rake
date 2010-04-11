@@ -66,6 +66,7 @@ namespace :war do
           puts "TOMCAT_HOME not configured in #{Rails.root}/config/war_deployer.rb"
         end
         `mv sample_app.war #{TOMCAT_HOME}/webapps/sample_app.war`
+      end
     end
   end
 end
