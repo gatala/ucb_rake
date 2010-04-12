@@ -13,7 +13,8 @@ require 'yaml'
 #   jboss_home: /path/to/jboss/home
 #
 #
-war_deployer = YAML.load_file("#{Rails.root}/config/war_deployer.yml")
-JBOSS_HOME = war_deployer["jboss_home"] if war_deployer.has_key?("jboss_home")
-TOMCAT_HOME = war_deployer["tomcat_home"] if war_deployer.has_key?("tomcat_home")
+if (war_deployer = YAML.load_file("#{Rails.root}/config/war_deployer.yml"))
+  JBOSS_HOME = war_deployer["jboss_home"] if war_deployer.has_key?("jboss_home")
+  TOMCAT_HOME = war_deployer["tomcat_home"] if war_deployer.has_key?("tomcat_home")
+end
 
