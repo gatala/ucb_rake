@@ -19,6 +19,11 @@ h3. War Deployer
 
 Read tasks/war_deployer.rake for details for configuration.
 
-* rake war:deploy:jboss - build app as .war file and deploy to jboss app server
-* rake war:extract - Extracts war file into a directory <app>.war/ (used for JBoss deployment)
-* rake war:deploy:tomcat - build app as .war file and deploy to tomcat app server
+* rake war:deploy:jboss - build app as .war file and deploy to jboss app server.
+* rake war:extract - Extracts war file into a directory <app>.war/ (used for JBoss deployment).
+* rake war:deploy:tomcat - build app as .war file and deploy to tomcat app server.
+
+
+h3. UCB DB Migrations
+
+* rake ucb:db:migrate - Run migrations with DDL credentials and updates app_user db permissions.
