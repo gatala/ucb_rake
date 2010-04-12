@@ -1,6 +1,19 @@
+require 'yaml'
+
 ################################################################################
 # war_deployer.rake 
 ################################################################################
-# JBOSS_HOME = /path/to/jboss/home/dir
-# TOMCAT_HOME = /path/to/tomcat/home/dir
+#
+# If you want to automate local war deployments to JBoss or Tomcat, edit the
+# file: Rails.root/config/war_deployer.yml (it is reccommended that you add
+# war_deployer.yml to svn:ignore)
+#
+# *war_deployer.yml*
+#   tomcat_home: /path/to/tomcat/home
+#   jboss_home: /path/to/jboss/home
+#
+#
+war_deployer = YAML.load_file("#{Rails.root}/config/war_deployer.yml")
+JBOSS_HOME = war_deployer["jboss_home"] if war_deployer.has_key?("jboss_home")
+TOMCAT_HOME = war_deployer["tomcat_home"] if war_deployer.has_key?("tomcat_home")
 

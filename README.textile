@@ -7,17 +7,16 @@ h2. Installation (from Rails.root run):
 
 <pre>
   script/plugin install git://github.com/glie/ucb_rake.git
-  # creates Rails.root/config/initializers/ucb_rake.rb
-  script/generate ucb_rake
+  script/generate ucb_rake   # creates Rails.root/config/initializers/ucb_rake.rb
 </pre>
 
 Before using these tasks, take a look at Rails.root/config/initializers/ucb_rake.rb and set the appropriate configuration options for your environment.
 
 h2. Tasks
 
-h3. War Deployer
+h3. War Deployment
 
-Read tasks/war_deployer.rake for details for configuration.
+See *Rails.root/config/initializers/ucb_rake.rb* for configuration details.
 
 * rake war:deploy:jboss - build app as .war file and deploy to jboss app server.
 * rake war:extract - Extracts war file into a directory <app>.war/ (used for JBoss deployment).
