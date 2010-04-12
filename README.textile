@@ -10,7 +10,7 @@ h2. Installation (from Rails.root run):
   script/generate ucb_rake   # creates Rails.root/config/initializers/ucb_rake.rb
 </pre>
 
-Before using these tasks, take a look at Rails.root/config/initializers/ucb_rake.rb and set the appropriate configuration options for your environment.
+Before using these tasks, take a look at *Rails.root/config/initializers/ucb_rake.rb* and set the appropriate configuration options for your environment.
 
 h2. Tasks
 

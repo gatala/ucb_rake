@@ -19,7 +19,7 @@ namespace :war do
     else
       war_guess = File.basename(Dir.getwd)
       APP_WAR = "#{war_guess}.war"      
-      puts "Guessing war to be #{APP_WAR}"
+      puts "APP_WAR => #{APP_WAR}"
     end
   end
   
@@ -55,6 +55,11 @@ namespace :war do
   end
   
   namespace :deploy do
+    task :env => [:init] do
+      puts "TOMCAT_HOME => #{TOMCAT_HOME}" if defined?(TOMCAT_HOME)
+      puts "JBOSS_HOME => #{JBOSS_HOME}" if defined?(JBOSS_HOME)
+    end
+    
     task :default => [:extract] do
       if !File.exists?(APP_WAR)
         puts "#{APP_WAR} not found"
