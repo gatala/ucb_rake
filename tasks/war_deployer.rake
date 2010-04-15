@@ -13,13 +13,15 @@ namespace :war do
     else
       require "#{Rails.root}/config/initializers/ucb_rake"
     end
-    
+  end
+
+  task :define_war => [:init] do
     if ARGV[1]
       APP_WAR = ARGV[1]
     else
       war_guess = File.basename(Dir.getwd)
       APP_WAR = "#{war_guess}.war"      
-      puts "APP_WAR => #{APP_WAR}"
+      puts "Guessing war to be: #{APP_WAR}"
     end
   end
   
@@ -29,7 +31,7 @@ namespace :war do
   end
   
   desc "Extracts war file into a directory <app>.war/ (used for JBoss deployment)"
-  task :extract => [:init, :warble, :build_tmp_war] do
+  task :extract => [:define_war, :warble, :build_tmp_war] do
     pwd = Dir.getwd
     Dir.chdir("tmp.war")
     `jar xvf #{APP_WAR}`
@@ -73,16 +75,35 @@ namespace :war do
         puts "JBOSS_HOME not configured. See: #{CONFIG_FILE}"
         exit(1)
       end
-      FileUtils.mv("sample_app.war ", "#{JBOSS_HOME}/server/default/deploy/sample_app.war")
+      
+      deploy_to = "#{JBOSS_HOME}/server/default/deploy"
+      unless File.writable?(deploy_to)
+        puts "#{deploy_to} is not writable."
+        puts "Run: 'sudo chmod 0777 #{deploy_to}' then try again."
+        exit(1)
+      end
+      
+      FileUtils.rm_rf("#{deploy_to}/#{APP_WAR}")
+      FileUtils.mv(APP_WAR, deploy_to)
+      puts "Deployed #{APP_WAR} to #{deploy_to}/#{APP_WAR}"      
     end
     
     desc "Build war file and deploy to tomcat"    
-    task :tomcat => [:init, :warble] do
+    task :tomcat => [:define_war, :warble] do
       if !defined?(TOMCAT_HOME)
         puts "TOMCAT_HOME not configured. See: #{CONFIG_FILE}"
         exit(1)
       end
-      FileUtils.mv("sample_app.war", "#{TOMCAT_HOME}/webapps/sample_app.war")
+
+      deploy_to = "#{TOMCAT_HOME}/webapps"
+      unless File.writable?(deploy_to)
+        puts "#{deploy_to} is not writable."
+        puts "Run: 'sudo chmod 0777 #{deploy_to}' then try again."
+        exit(1)        
+      end
+
+      FileUtils.mv(APP_WAR, deploy_to)
+      puts "Deployed #{APP_WAR} to #{deploy_to}/#{APP_WAR}"
     end
   end
 end
