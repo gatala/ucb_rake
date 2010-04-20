@@ -16,7 +16,7 @@ namespace :ucb do
     end
     
     desc "Run migrations with DDL credentials and updates app_user db permissions."
-    task :migrate => ['init', 'db:migrate'] do
+    task :migrate => ['init', 'rake:db:migrate'] do
       spec = ActiveRecord::Base.establish_connection
       conn = ActiveRecord::Base.connection
       case conn.adapter_name.downcase
