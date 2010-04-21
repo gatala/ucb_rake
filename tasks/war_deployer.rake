@@ -1,9 +1,8 @@
 # These tasks allow you to quickly deploy a rails app that has been built as a
 # .war archive to JBoss or Tomcat.
-
 require 'fileutils'
 
-CONFIG_FILE = "#{Rails.root}/config/initializers/ucb_rake.rb"
+CONFIG_FILE = "#{Rails.root}/config/initializers/local/ucb_rake.rb"
 
 namespace :war do
   task :init do
@@ -11,7 +10,7 @@ namespace :war do
       puts "ucb_rake not initialized, run: script/generate ucb_rake"
       exit(1)
     else
-      require "#{Rails.root}/config/initializers/ucb_rake"
+      require "#{Rails.root}/config/initializers/local/ucb_rake"
     end
   end
 
